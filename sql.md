@@ -19,3 +19,21 @@
 ## 编译与链接：
 > 有mysql编译和链接时，要添加库选项：gcc -o a a.c -lmysqlclient
 
+
+# 前提紧要
+col：代表列
+SELECT：找什么
+FROM：从哪个table找
+WHERE：col条件是什么
+# 条件：数字(where)
+SELECT * FROM table WHERE col=1;
+
+| Operator | Condition | SQL Example | Explain |
+| --- | --- | --- | --- |
+| =,!=,>,>=,<,<= | Standard numerical operators | col!=4 | 等于，大于，小于 |
+| BETWEEN.. AND .. | Number is within range of two values(inclusive) | col BETWEEN 1 AND 10 | 在x和y之间 |
+| NOT BETWEEN.. AND .. | Number is not within range of two values(inclusive) | col NOT BETWEEN 1 AND 10 | 不在x和y之间 |
+| IN(...) | Number exists in a list | col IN(1,3,5) | 在x集合 |
+| NOT IN(...) | Number does not exists in a list | col NOT IN (1,3,5) | 不在x集合 |
+
+
