@@ -26,6 +26,7 @@ SELECT：找什么
 FROM：从哪个table找
 WHERE：col条件是什么
 # 条件：数字(where)
+当查找条件是数字
 SELECT * FROM table WHERE col=1;
 
 | Operator | Condition | SQL Example | Explain |
@@ -37,3 +38,20 @@ SELECT * FROM table WHERE col=1;
 | NOT IN(...) | Number does not exists in a list | col NOT IN (1,3,5) | 不在x集合 |
 
 
+# 条件：文本(where)
+当查找条件是文本
+SELECT * FROM table WHERE col like '%you';
+
+| Operator | Condition | SQL Example | Explain |
+| --- | --- | --- | --- |
+| = | Case sensitive exact string comparison (notice the single equals) | col="abc" | 等于 |
+| != or <> | Case sensitive exact string inequality comparison | col!="abc" | 不等于 |
+| LIKE | Case insensitive exact string comparison  | col LIKE "ABC" | 等于 |
+| NOT LIKE | Case insensitive exact string inequality comparison | col NOT LIKE "ABC" | 不等于 |
+| % | Used anywhere in a string to match a sequence of zero or more characters (only with LIKE or NOT LIKE) | col LIKE "%AT%" (matches "AT", "ATTIC", "CAT" or even "BATS") | 模糊匹配 |
+| _ | Used anywhere in a string to match a single character (only with LIKE or NOT LIKE) | col LIKE "AN_" (matches "AND", but not "AN") | 模糊匹配单字符 |
+| IN(...) | String exists in a list | col IN ("A", "B", "C") | 在集合 |
+| NOT IN(...) | String does not exist in a list | co NOT IN ("D", "E", "F") | 不在集合 |
+
+
+# 排序(rows)
