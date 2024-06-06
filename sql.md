@@ -55,3 +55,11 @@ SELECT * FROM table WHERE col like '%you';
 
 
 # 排序(rows)
+| Operator | Condition | SQL Example | xplain |
+| --- | --- | --- | --- |
+| ORDER BY | - | ORDER BY col ASC/DESC | 按col排序 |
+| ASC | - | ORDER BY col ASC/DESC | 升序 |
+| DESC | - | ORDER BY col ASC/DESC | 降序 |
+| LIMIT OFFSET | - | LIMIT num_limit OFFSET num_offset | 从offset取limit |
+| ORDER BY | - | ORDER BY col1 ASC,col2 DESC | 多列排序 |
+
