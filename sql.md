@@ -63,3 +63,16 @@ SELECT * FROM table WHERE col like '%you';
 | LIMIT OFFSET | - | LIMIT num_limit OFFSET num_offset | 从offset取limit |
 | ORDER BY | - | ORDER BY col1 ASC,col2 DESC | 多列排序 |
 
+
+# join:连表(table)
+当查找的数据在多张关联table里
+SELECT * FROM table1 left join table2 on table1.id=table2.id where col>1
+
+| Operator | Condition | SQL Example | Explain |
+| --- | --- | --- | --- |
+| JOIN..ON | - | t1 JOIN t2 ON t1.id=t2.id | 按ID连成一个表 |
+| INNER JOIN | - | t1 INNER JOIN t2 ON t1.id=t2.id | 只保留id相等的row |
+| LEFT JOIN | - | t1 LEFT JOIN t2 ON t1.id=t2.id | 保留t1的所有row |
+| RIGHT JOIN | - | t1 RIGHT JOIN t2 ON t1.id=t2.id | 保留t2的所有row |
+| IS/IS NOT NULL | - | col IS/IS NOT NULL | col是不是为null |
+
