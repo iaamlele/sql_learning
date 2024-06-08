@@ -76,3 +76,17 @@ SELECT * FROM table1 left join table2 on table1.id=table2.id where col>1
 | RIGHT JOIN | - | t1 RIGHT JOIN t2 ON t1.id=t2.id | 保留t2的所有row |
 | IS/IS NOT NULL | - | col IS/IS NOT NULL | col是不是为null |
 
+
+# 算式(select/where)
+当需要对select的col或where条件的col经过一定计算后才能使用
+SELECT *,col*2 from table where col/2>1
+
+| Operator | Condition | SQL Example | Explain |
+| --- | --- | --- | --- |
+| +-*/% | - | col1+col2 | col加减乘除 |
+| substr | - | substr(col,0,4) | 字符串截取 |
+| AS | - | col * 2 AS col_new | col取别名 |
+| ... | 
+ | 
+ | 还有很多 |
+
