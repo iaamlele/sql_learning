@@ -1,0 +1,55 @@
+#添加外键
+ALTER TABLE borrow
+ADD CONSTRAINT FK_BookBorrow
+FOREIGN KEY (ISBN) REFERENCES book(ISBN);
+
+ALTER TABLE book
+ADD CONSTRAINT FK_CategoryBook
+FOREIGN KEY (BCategory) REFERENCES category(category_id); 
+
+ALTER TABLE penalty
+ADD CONSTRAINT FK_BokkPenalty
+FOREIGN KEY (ISBN) REFERENCES book(ISBN);
+
+ALTER TABLE borrow
+ADD CONSTRAINT FK_ReaderBorrow
+FOREIGN KEY (RID) REFERENCES reader(RID);
+
+#查找整个表中外键关系
+SELECT 
+    TABLE_NAME, 
+    COLUMN_NAME, 
+    CONSTRAINT_NAME, 
+    REFERENCED_TABLE_NAME, 
+    REFERENCED_COLUMN_NAME 
+FROM 
+    INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+WHERE 
+    TABLE_SCHEMA = 'new_schema' 
+    AND REFERENCED_TABLE_NAME IS NOT NULL;
+
+SELECT * FROM new_schema.book;
+
+#查询外健名称
+SELECT 
+    CONSTRAINT_NAME 
+FROM 
+    INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+WHERE 
+    TABLE_SCHEMA = 'new_schema' 
+    AND TABLE_NAME = 'borrow' 
+    AND COLUMN_NAME = 'RID';
+    
+#删除外键
+ALTER TABLE borrow DROP FOREIGN KEY FK_ReaderBorrow;
+
+-- #按照key查询图书
+SELECT * FROM book WHERE ISBN='123'; 
+
+SELECT * FROM new_schema.book;
+UPDATE `new_schema`.`book` SET `Bcount` = `Bcount`+2 WHERE (`ISBN` = '123');
+SELECT * FROM book WHERE ISBN='123' AND BName='book1' AND BCategory='1' AND ABS(Price-32.3) < 0.001  AND Bcount='15' AND PubDate='24/3/2' AND Author='lele' AND PubComp='abc';
+
+SELECT Bcount FROM book WHERE ISBN='123';
+
+SELECT * FROM book WHERE BName LIKE '%w%';
