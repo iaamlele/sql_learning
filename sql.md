@@ -68,7 +68,30 @@ SELECT *,col*2 from table where col/2>1
  | 
  | 还有很多 |
 
-# 其他小知识+遇到的问题
+# 统计(select)
+| Operator | Condition | SQL Example | Explain |
+| --- | --- | --- | --- |
+| COUNT(*), COUNT(column) | A common function used to counts the number of rows in the group if no column name is specified. Otherwise, count the number of rows in the group with non-NULL values in the specified column. | count(col) | 计数 |
+| MIN(column) | Finds the smallest numerical value in the specified column for all rows in the group. | min(col) | 最小 |
+| MAX(column) | Finds the largest numerical value in the specified column for all rows in the group. | max(col) | 最大 |
+| AVG(column) | Finds the average numerical value in the specified column for all rows in the group. | avg(col) | 平均 |
+| SUM(column) | Finds the sum of all numerical values in the specified column for the rows in the group. | sum(col) | 求和 |
+| GROUP BY | 
+ | group by col,col2 | 分组 |
+| HAVING | 
+ | HAVING col>100 | 分组后条件 |
+
+# 子表(table)
+一次select的结果rows作为下一次select的临时table才能得到最终结果
+SELECT × from （SELECT × FROM table where col>1） as tmp where col<1
+
+| Operator | Condition  | SQL Example | Explain |
+| --- | --- | --- | --- |
+| (select-) as tmp |  | (select-) as tmp | select结果做子表 |
+| in (select-) |  | in (select-) | select结果做条件 |
+| avg (select-) |  | avg (select-) | select结果做条件 |
+
+# 遇到的问题总结
 ## 1.workbench连接mysql
 > 1.本地操作：
 > a.登录mysql：sudo mysql -u root -p
@@ -127,4 +150,25 @@ SELECT *,col*2 from table where col/2>1
 ## 8.段错误 (核心已转储)--代码检查思路
 > 1.检查是否没有free malloc/mysql_free_result(result)/mysql_close(con);
 > 2.检查是否有情况导致以上语句不执行
+
+
+# 知识储备
+## 1.介绍mysql
+> mysql是一种开源免费的关系型数据库，是一种用来存放数据的容器。它具备以下特点：
+> 1. 关系型数据库：数据以表格的方式进行存储，表格分为了行和列，便于存储和管理结构化数据。
+> 2. 跨平台性：mysql可以在多个操作系统上运行。
+> 3. 开源免费
+> 4. 使用标准的sql语言，使用户可以方便的对数据进行增删改查等操作，并且单词相对简单，上手快。
+> 5. 事务支持：有四大事务特性，可以保证数据的一致性和完整性。
+> 6. 高性能和可扩展性：mysql可以处理大量的并发请求，同时也支持分库分表，主从复制来提高数据库的负载能力。
+> 7. 安全性：用户需要输入用户名和密码才能操作数据库，并且也可以对具体的用户设置访问权限。
+
+## 2.mysql缓存
+> mysql5.7是内部支持的，而8.0之后就废弃了查询缓存。
+> 查询缓存是在第一次执行sql查询语句后，将对应的结果存储在内存中，后续再执行相同的sql语句就可以直接从内存中获取结果，速度更快。
+> 
+> 但是mysql的查询缓存有一些缺点：
+> 1. 使用缓存占用一定的内存空间。
+> 2. 只有相同的sql才会去查询缓存。
+> 3. 一旦进行数据更新后，相应的缓存就会失效，所以在更新较频繁的场景下，缓存命中率低。
 
